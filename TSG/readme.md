@@ -1,12 +1,12 @@
 # Collect TSG logs from sensor
 
-## 1.SSH to sensor using `cyberx` account
+## 1.SSH to sensor using `cyberx_host` account
 ### [Access per privileged user](https://learn.microsoft.com/en-us/azure/defender-for-iot/organizations/roles-on-premises#access-per-privileged-user)
-![image](https://github.com/user-attachments/assets/2385be1b-7bca-4fee-b576-23e5a88ef388)
+![image](https://github.com/user-attachments/assets/210042f5-3a3b-495b-aa68-89e9398a6f49)
 
 ## 2. Creat bash script to collect logs
 ```sh
-cd /opt && nano d4iot_tsg_logs.sh
+cd && cd /tmp && nano d4iot_tsg_logs.sh
 ```
 
 Save the context below

@@ -57,7 +57,7 @@ Run the script
 chmod +x d4iot_tsg_logs.sh
 ```
 ```sh
-bash ./d4iot_tsg_logs.sh
+sudo bash ./d4iot_tsg_logs.sh
 ```
 
 ![image](https://github.com/user-attachments/assets/6f42fadc-5e1e-4ae2-b23f-1bee413aecbc)

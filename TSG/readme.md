@@ -60,9 +60,9 @@ sudo chmod +x d4iot_tsg_logs.sh
 sudo bash ./d4iot_tsg_logs.sh
 ```
 
-![image](https://github.com/user-attachments/assets/6f42fadc-5e1e-4ae2-b23f-1bee413aecbc)
+![image](https://github.com/user-attachments/assets/3336e50c-2a8b-40aa-9db9-7338f7e1e351)
 
-![image](https://github.com/user-attachments/assets/6d81556f-43f4-4584-965e-cbc5ec6e2331)
+![image](https://github.com/user-attachments/assets/d9e597ef-85ef-44f3-aac7-fafe9f85ff98)
 
 
 ## 3.Export logs via SFTP

@@ -66,7 +66,8 @@ sudo bash ./d4iot_tsg_logs.sh
 
 
 ## 3.Export logs via SFTP
-### SFTP using `cyberx` account
-![image](https://github.com/user-attachments/assets/e5d5fde7-267c-474b-9b58-32ccc64be30f)
+### SFTP using `cyberx_host` account, navigate to path `/tmp`
+![image](https://github.com/user-attachments/assets/6767b546-0218-4720-bd20-822ff6f041f1)
+
 
 

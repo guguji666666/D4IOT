@@ -54,7 +54,7 @@ fi
 
 Run the script
 ```sh
-chmod +x d4iot_tsg_logs.sh
+sudo chmod +x d4iot_tsg_logs.sh
 ```
 ```sh
 sudo bash ./d4iot_tsg_logs.sh

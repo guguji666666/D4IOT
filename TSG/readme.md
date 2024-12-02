@@ -43,7 +43,7 @@ else
 fi
 # Create tar file with existing paths
 if [ ${#existing_paths[@]} -ne 0 ]; then
-    tar -cvf iottsglogs.tar "${existing_paths[@]}"
+    tar -cvf iottsglogs.tar "${existing_paths[@]}" && echo "Tar file created: iottsglogs.tar"
 else
     echo "No valid paths to include in the tar file."
 fi

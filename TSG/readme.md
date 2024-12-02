@@ -49,6 +49,9 @@ else
 fi
 ```
 
+![image](https://github.com/user-attachments/assets/a756b164-fdee-4750-a56f-d8f6540f83be)
+
+
 Run the script
 ```sh
 chmod +x d4iot_tsg_logs.sh

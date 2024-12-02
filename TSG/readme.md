@@ -64,3 +64,9 @@ bash ./d4iot_tsg_logs.sh
 
 ![image](https://github.com/user-attachments/assets/6d81556f-43f4-4584-965e-cbc5ec6e2331)
 
+
+## 3.Export logs via SFTP
+### SFTP using `cyberx` account
+![image](https://github.com/user-attachments/assets/e5d5fde7-267c-474b-9b58-32ccc64be30f)
+
+

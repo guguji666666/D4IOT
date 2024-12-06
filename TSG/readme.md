@@ -35,6 +35,7 @@ create bash script save the context below
 ```sh
 nano collect_iot_logs.sh
 ```
+
 ```sh
 #!/bin/bash
 
@@ -80,59 +81,6 @@ else
 fi
 ```
 
-```sh
-#!/bin/bash
-
-# List of paths to check and copy
-paths=(
-    "/opt/sensor/active/var/cyberx/logs/azureiothub.log"  # Specific log file path
-    "/var/cyberx/logs"                                   # Directory containing logs
-    "/opt/sensor/logs"                                   # Another directory for logs
-    "/opt/sensor/active/var/logs"                        # Location for active logs
-    "/var/host-logs"                                     # Host logs directory
-    "/var/services-logs"                                 # Services logs directory
-)
-
-# The destination directory for copying files
-destination_directory="/opt/sensor/logs/iot_tsg_logs"
-
-# Initialize arrays for existing and missing paths
-existing_paths=()  # Array to hold paths that exist
-missing_paths=()   # Array to hold paths that do not exist
-
-# Check each path for existence
-for path in "${paths[@]}"; do
-    if [ -e "$path" ]; then                     # Check if the path exists
-        existing_paths+=("$path")              # Add to existing paths if found
-    else
-        missing_paths+=("$path")                # Add to missing paths if not found
-    fi
-done
-
-# Output existing paths
-if [ ${#existing_paths[@]} -ne 0 ]; then            # Check if there are existing paths
-    echo "The following paths exist:"
-    for path in "${existing_paths[@]}"; do
-        echo "$path"                                # List each existing path
-
-        # Copying files or directories to the destination directory
-        cp -r "$path" "$destination_directory/"      # Use cp -r for directories, omit for files
-    done
-else
-    echo "No valid paths exist."                    # Message if no paths are valid
-fi
-
-# Output missing paths
-if [ ${#missing_paths[@]} -ne 0 ]; then            # Check if there are missing paths
-    echo "The following paths are missing:"        # Output message for missing paths
-    for path in "${missing_paths[@]}"; do
-        echo "$path"                                # List each missing path
-    done
-else
-    echo "All paths exist."                        # Confirmation message if all paths exist
-fi
-```
-
 Run the script
 ```sh
 sudo chmod +x collect_iot_logs.sh
@@ -140,13 +88,19 @@ sudo chmod +x collect_iot_logs.sh
 ```sh
 sudo bash ./collect_iot_logs.sh
 ```
-![image](https://github.com/user-attachments/assets/637d30e7-6302-42d4-891a-00387e03c0f2)
+
+## 3. Creating Compressed Tarball 
+```sh
+tar -czvf iottsglogs.tar.gz -C /opt/sensor/logs iot_tsg_logs
+```
+![image](https://github.com/user-attachments/assets/209938b0-a061-4ee0-b7d2-c44942a1decd)
 
 
+## 4.Export logs via SFTP
+### SFTP using `cyberx_host` account, navigate to path `/opt/sensor/logs`
+![image](https://github.com/user-attachments/assets/6fb8b417-5197-4ba6-8575-92d776fe3f98)
 
-## 3.Export logs via SFTP
-### SFTP using `cyberx_host` account, navigate to path `/tmp`
-![image](https://github.com/user-attachments/assets/6767b546-0218-4720-bd20-822ff6f041f1)
+
 
 
 

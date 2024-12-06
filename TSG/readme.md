@@ -1,13 +1,29 @@
 # Collect TSG logs from sensor
 
-## 1.SSH to sensor using `cyberx_host` account
+## 1.SSH to sensor using `cyberx` account
 ### [Access per privileged user](https://learn.microsoft.com/en-us/azure/defender-for-iot/organizations/roles-on-premises#access-per-privileged-user)
-![image](https://github.com/user-attachments/assets/210042f5-3a3b-495b-aa68-89e9398a6f49)
+![image](https://github.com/user-attachments/assets/aac6174b-929c-433d-8791-b242c267c17d)
 
-## 2. Creat bash script to collect logs
+
+## 2. Verify the `core.log` and `core.err.log` exists
 ```sh
-cd && cd /tmp && nano d4iot_tsg_logs.sh
+cd /var/cyberx/logs
 ```
+![image](https://github.com/user-attachments/assets/2cc1bb09-3f4e-4608-923c-f4a7c4229835)
+
+## 3. Copy the core.log and core.err.log logs
+```sh
+# Create the destination directory if it does not exist
+mkdir -p /var/host-logs/iot_tsg_logs
+
+# Copy the log files to the destination directory
+cp /var/cyberx/logs/core.log /var/cyberx/logs/core.err.log /var/host-logs/iot_tsg_logs/
+```
+
+## 4. SSH to sensor using `cyberx_host` account
+### [Access per privileged user](https://learn.microsoft.com/en-us/azure/defender-for-iot/organizations/roles-on-premises#access-per-privileged-user)
+![image](https://github.com/user-attachments/assets/3428d642-5b9e-4fb0-b2ee-a240c220d599)
+
 
 Save the context below
 ```sh

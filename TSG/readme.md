@@ -83,7 +83,7 @@ fi
 ```sh
 #!/bin/bash
 
-# List of paths to check
+# List of paths to check and copy
 paths=(
     "/opt/sensor/active/var/cyberx/logs/azureiothub.log"  # Specific log file path
     "/var/cyberx/logs"                                   # Directory containing logs
@@ -92,6 +92,9 @@ paths=(
     "/var/host-logs"                                     # Host logs directory
     "/var/services-logs"                                 # Services logs directory
 )
+
+# The destination directory for copying files
+destination_directory="/opt/sensor/logs/iot_tsg_logs"
 
 # Initialize arrays for existing and missing paths
 existing_paths=()  # Array to hold paths that exist
@@ -111,6 +114,9 @@ if [ ${#existing_paths[@]} -ne 0 ]; then            # Check if there are existin
     echo "The following paths exist:"
     for path in "${existing_paths[@]}"; do
         echo "$path"                                # List each existing path
+
+        # Copying files or directories to the destination directory
+        cp -r "$path" "$destination_directory/"      # Use cp -r for directories, omit for files
     done
 else
     echo "No valid paths exist."                    # Message if no paths are valid

@@ -80,6 +80,53 @@ else
 fi
 ```
 
+```sh
+#!/bin/bash
+
+# List of paths to check
+paths=(
+    "/opt/sensor/active/var/cyberx/logs/azureiothub.log"  # Specific log file path
+    "/var/cyberx/logs"                                   # Directory containing logs
+    "/opt/sensor/logs"                                   # Another directory for logs
+    "/opt/sensor/active/var/logs"                        # Location for active logs
+    "/var/host-logs"                                     # Host logs directory
+    "/var/services-logs"                                 # Services logs directory
+)
+
+# Initialize arrays for existing and missing paths
+existing_paths=()  # Array to hold paths that exist
+missing_paths=()   # Array to hold paths that do not exist
+
+# Check each path for existence
+for path in "${paths[@]}"; do
+    if [ -e "$path" ]; then                     # Check if the path exists
+        existing_paths+=("$path")              # Add to existing paths if found
+    else
+        missing_paths+=("$path")                # Add to missing paths if not found
+    fi
+done
+
+# Output existing paths
+if [ ${#existing_paths[@]} -ne 0 ]; then            # Check if there are existing paths
+    echo "The following paths exist:"
+    for path in "${existing_paths[@]}"; do
+        echo "$path"                                # List each existing path
+    done
+else
+    echo "No valid paths exist."                    # Message if no paths are valid
+fi
+
+# Output missing paths
+if [ ${#missing_paths[@]} -ne 0 ]; then            # Check if there are missing paths
+    echo "The following paths are missing:"        # Output message for missing paths
+    for path in "${missing_paths[@]}"; do
+        echo "$path"                                # List each missing path
+    done
+else
+    echo "All paths exist."                        # Confirmation message if all paths exist
+fi
+```
+
 Run the script
 ```sh
 sudo chmod +x collect_iot_logs.sh
@@ -87,6 +134,8 @@ sudo chmod +x collect_iot_logs.sh
 ```sh
 sudo bash ./collect_iot_logs.sh
 ```
+![image](https://github.com/user-attachments/assets/637d30e7-6302-42d4-891a-00387e03c0f2)
+
 
 
 ## 3.Export logs via SFTP

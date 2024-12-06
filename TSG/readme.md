@@ -80,20 +80,13 @@ else
 fi
 ```
 
-![image](https://github.com/user-attachments/assets/e7ebef8c-dbc0-44c9-8d06-7d7fd58bd934)
-
-
 Run the script
 ```sh
-sudo chmod +x d4iot_tsg_logs.sh
+sudo chmod +x collect_iot_logs.sh
 ```
 ```sh
-sudo bash ./d4iot_tsg_logs.sh
+sudo bash ./collect_iot_logs.sh
 ```
-
-![image](https://github.com/user-attachments/assets/3336e50c-2a8b-40aa-9db9-7338f7e1e351)
-
-![image](https://github.com/user-attachments/assets/d9e597ef-85ef-44f3-aac7-fafe9f85ff98)
 
 
 ## 3.Export logs via SFTP

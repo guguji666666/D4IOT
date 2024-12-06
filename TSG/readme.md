@@ -24,44 +24,59 @@ cp /var/cyberx/logs/core.log /var/cyberx/logs/core.err.log /var/host-logs/iot_ts
 ### [Access per privileged user](https://learn.microsoft.com/en-us/azure/defender-for-iot/organizations/roles-on-premises#access-per-privileged-user)
 ![image](https://github.com/user-attachments/assets/3428d642-5b9e-4fb0-b2ee-a240c220d599)
 
+Navigate to directory `/opt/sensor/logs`,  verify the directory `iot_tsg_logs` we created previously could be found
+```sh
+cd /opt/sensor/logs && ls -al
+```
+![image](https://github.com/user-attachments/assets/bc6fdf08-f070-4486-903f-67b1f0370422)
 
-Save the context below
+
+create bash script save the context below
+```sh
+nano collect_iot_logs.sh
+```
 ```sh
 #!/bin/bash
+
 # List of paths to check and archive
 paths=(
-    "/opt/sensor/active/var/cyberx/logs/azureiothub.log"
-    "/var/cyberx/logs"
-    "/opt/sensor/logs"
-    "/opt/sensor/active/var/logs"
-    "/var/host-logs"
-    "/var/services-logs"
+    "/opt/sensor/active/var/cyberx/logs/azureiothub.log"  # Specific log file path
+    "/var/cyberx/logs"                                   # Directory containing logs
+    "/opt/sensor/logs"                                   # Another directory for logs
+    "/opt/sensor/active/var/logs"                        # Location for active logs
+    "/var/host-logs"                                     # Host logs directory
+    "/var/services-logs"                                 # Services logs directory
 )
+
 # Initialize arrays for existing and missing paths
-existing_paths=()
-missing_paths=()
-# Check each path
+existing_paths=()  # Array to hold paths that exist
+missing_paths=()   # Array to hold paths that do not exist
+
+# Check each path for existence
 for path in "${paths[@]}"; do
-    if [ -e "$path" ]; then
-        existing_paths+=("$path")
+    if [ -e "$path" ]; then                     # Check if the path exists
+        existing_paths+=("$path")              # Add to existing paths if found
     else
-        missing_paths+=("$path")
+        missing_paths+=("$path")                # Add to missing paths if not found
     fi
 done
+
 # Output missing paths
-if [ ${#missing_paths[@]} -ne 0 ]; then
-    echo "The following paths are missing:"
+if [ ${#missing_paths[@]} -ne 0 ]; then            # Check if there are missing paths
+    echo "The following paths are missing:"        # Output message for missing paths
     for path in "${missing_paths[@]}"; do
-        echo "$path"
+        echo "$path"                                # List each missing path
     done
 else
-    echo "All paths exist."
+    echo "All paths exist."                        # Confirmation message if all paths exist
 fi
+
 # Create tar file with existing paths
-if [ ${#existing_paths[@]} -ne 0 ]; then
-    tar -cvf iottsglogs.tar "${existing_paths[@]}" && echo "Tar file created: iottsglogs.tar"
+if [ ${#existing_paths[@]} -ne 0 ]; then            # Check if there are existing paths
+    tar -cvf /opt/sensor/logs/iot_tsg_logs/iottsglogs.tar "${existing_paths[@]}" && \
+    echo "Tar file created: /opt/sensor/logs/iot_tsg_logs/iottsglogs.tar"
 else
-    echo "No valid paths to include in the tar file."
+    echo "No valid paths to include in the tar file."  # Message if no paths are valid
 fi
 ```
 

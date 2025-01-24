@@ -173,7 +173,7 @@ fi
 sudo rm -rf "$TEMP_DIR"
 ```
 
-press `CTRL` and `x` on your keyboard, then press `y` and hit enter to save the script.
+### Press `CTRL` and `x` on your keyboard, then press `y` and hit enter to save the script.
 
 
 ## 4.Make it executable with command

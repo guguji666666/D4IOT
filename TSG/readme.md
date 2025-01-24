@@ -1,105 +1,193 @@
-# Collect TSG logs from sensor
+# Collect TSG logs from OT sensor
 
-## 1.SSH to sensor using `cyberx` account
-### [Access per privileged user](https://learn.microsoft.com/en-us/azure/defender-for-iot/organizations/roles-on-premises#access-per-privileged-user)
-![image](https://github.com/user-attachments/assets/aac6174b-929c-433d-8791-b242c267c17d)
+## 1. SSH into OT sensor using `cyberx_host`
+[Access per privileged user](https://learn.microsoft.com/en-us/azure/defender-for-iot/organizations/roles-on-premises#access-per-privileged-user)
+
+![image](https://github.com/user-attachments/assets/fba69ed0-9fd3-4665-8e2e-96db1c83aefb)
 
 
-## 2. Verify the `core.log` and `core.err.log` exists
+## 2.Verify if the path is `/home/cyber_host`
 ```sh
-cd /var/cyberx/logs
+cd /home/cyber_host
 ```
-![image](https://github.com/user-attachments/assets/2cc1bb09-3f4e-4608-923c-f4a7c4229835)
+![image](https://github.com/user-attachments/assets/6713ce3b-0439-42f0-97b6-258a41cfacf4)
 
-## 3. Copy the core.log and core.err.log logs
+## 3. Create bash script
 ```sh
-# Create the destination directory if it does not exist
-mkdir -p /var/host-logs/iot_tsg_logs
-
-# Copy the log files to the destination directory
-cp /var/cyberx/logs/core.log /var/cyberx/logs/core.err.log /var/host-logs/iot_tsg_logs/
+nano microsoft_d4iot_tsg.sh
 ```
-
-## 4. SSH to sensor using `cyberx_host` account
-### [Access per privileged user](https://learn.microsoft.com/en-us/azure/defender-for-iot/organizations/roles-on-premises#access-per-privileged-user)
-![image](https://github.com/user-attachments/assets/3428d642-5b9e-4fb0-b2ee-a240c220d599)
-
-Navigate to directory `/opt/sensor/logs`,  verify the directory `iot_tsg_logs` we created previously could be found
-```sh
-cd /opt/sensor/logs && ls -al
-```
-![image](https://github.com/user-attachments/assets/bc6fdf08-f070-4486-903f-67b1f0370422)
-
-
-create bash script save the context below
-```sh
-nano collect_iot_logs.sh
-```
-
 ```sh
 #!/bin/bash
 
+# Script name: microsoft_d4iot_tsg.sh
+
+# Purpose: This script creates a gzipped tar archive of specified directories under /opt/sensor,
+
+#          with a filename that includes the current date and time in UTC.
+
+# The script is designed to work with Microsoft's D4IoT system.
+
+  
+
+# Function to generate a timestamp in UTC
+
+# The format YYYYMMDD_HHMMSS is used to ensure a unique and sortable identifier
+
+generate_timestamp() {
+
+    date -u +"%Y%m%d_%H%M%S"
+
+}
+
+  
+
+# Generate the timestamp
+
+TIMESTAMP=$(generate_timestamp)
+
+  
+
+# Name of the tar file
+
+TAR_FILE="D4IOT_MS_TSG_${TIMESTAMP}.tar.gz"  # Add .gz to indicate compression
+
+  
+
 # List of paths to check and archive
+
 paths=(
-    "/opt/sensor/active/var/cyberx/logs/azureiothub.log"  # Specific log file path
-    "/var/cyberx/logs"                                   # Directory containing logs
-    "/opt/sensor/logs"                                   # Another directory for logs
-    "/opt/sensor/active/var/logs"                        # Location for active logs
-    "/var/host-logs"                                     # Host logs directory
-    "/var/services-logs"                                 # Services logs directory
+
+    "/opt/sensor/active/var/cyberx/logs"
+
+    "/opt/sensor/active/var/logs"
+
+    "/opt/sensor/logs"
+
 )
 
+  
+
 # Initialize arrays for existing and missing paths
-existing_paths=()  # Array to hold paths that exist
-missing_paths=()   # Array to hold paths that do not exist
+
+existing_paths=()  # Array to hold paths that exist
+
+missing_paths=()   # Array to hold paths that do not exist
+
+  
 
 # Check each path for existence
+
 for path in "${paths[@]}"; do
-    if [ -e "$path" ]; then                     # Check if the path exists
-        existing_paths+=("$path")              # Add to existing paths if found
-    else
-        missing_paths+=("$path")                # Add to missing paths if not found
-    fi
+
+    if [ -e "$path" ]; then                     # Check if the path exists
+
+        existing_paths+=("$path")              # Add to existing paths if found
+
+    else
+
+        missing_paths+=("$path")                # Add to missing paths if not found
+
+    fi
+
 done
 
+  
+
 # Output missing paths
-if [ ${#missing_paths[@]} -ne 0 ]; then            # Check if there are missing paths
-    echo "The following paths are missing:"        # Output message for missing paths
-    for path in "${missing_paths[@]}"; do
-        echo "$path"                                # List each missing path
-    done
+
+if [ ${#missing_paths[@]} -ne 0 ]; then            # Check if there are missing paths
+
+    echo "The following paths are missing:"
+
+    for path in "${missing_paths[@]}"; do
+
+        echo "$path"
+
+    done
+
 else
-    echo "All paths exist."                        # Confirmation message if all paths exist
+
+    echo "All paths exist."
+
 fi
 
-# Create tar file with existing paths
-if [ ${#existing_paths[@]} -ne 0 ]; then            # Check if there are existing paths
-    tar -cvf /opt/sensor/logs/iot_tsg_logs/iottsglogs.tar "${existing_paths[@]}" && \
-    echo "Tar file created: /opt/sensor/logs/iot_tsg_logs/iottsglogs.tar"
-else
-    echo "No valid paths to include in the tar file."  # Message if no paths are valid
+  
+
+# Check disk space in /home/cyberx_host
+
+DISK_SPACE=$(df -k /home/cyberx_host | awk 'NR==2 {print $4}')
+
+if [ $DISK_SPACE -lt 100000 ]; then  # Less than 100MB free
+
+    echo "Insufficient disk space in /home/cyberx_host. At least 100MB required."
+
+    exit 1
+
 fi
+
+  
+
+# Create a temporary directory
+
+TEMP_DIR="/tmp/d4iot_ms_tsg_temp_${TIMESTAMP}"
+
+sudo mkdir -p "$TEMP_DIR"
+
+  
+
+# Copy the existing paths to the temporary directory
+
+for path in "${existing_paths[@]}"; do
+
+    sudo cp -r "$path" "$TEMP_DIR/"
+
+done
+
+  
+
+# Create gzipped tar file from the temporary directory
+
+if sudo tar -cvzPf "/home/cyberx_host/${TAR_FILE}" -C "$TEMP_DIR" .; then
+
+    echo "Gzipped tar file created: /home/cyberx_host/${TAR_FILE}"
+
+else
+
+    echo "Failed to create gzipped tar file. Check permissions or disk space."
+
+    # Check if the tar file was partially created and remove it if so
+
+    if [ -f "/home/cyberx_host/${TAR_FILE}" ]; then
+
+        sudo rm "/home/cyberx_host/${TAR_FILE}"
+
+        echo "Removed partially created gzipped tar file."
+
+    fi
+
+fi
+
+  
+
+# Remove the temporary directory
+
+sudo rm -rf "$TEMP_DIR"
 ```
 
-Run the script
+## 4.Make it executable with command
+
 ```sh
-sudo chmod +x collect_iot_logs.sh
+chmod +x microsoft_d4iot_tsg.sh
 ```
+
+## 5.Run the script
 ```sh
-sudo bash ./collect_iot_logs.sh
+./microsoft_d4iot_tsg.sh
 ```
 
-## 3. Creating Compressed Tarball 
-```sh
-tar -czvf iottsglogs.tar.gz -C /opt/sensor/logs iot_tsg_logs
-```
-![image](https://github.com/user-attachments/assets/209938b0-a061-4ee0-b7d2-c44942a1decd)
-
-
-## 4.Export logs via SFTP
-### SFTP using `cyberx_host` account, navigate to path `/opt/sensor/logs`
-![image](https://github.com/user-attachments/assets/6fb8b417-5197-4ba6-8575-92d776fe3f98)
-
+## 6. Export logs using SFTP (user account cyberx_host)
+SFTP using `cyberx_host` account, navigate to path `/home/cyber_host`
+![image](https://github.com/user-attachments/assets/452b2552-e7f0-408f-aa35-87f668a9bc9b)
 
 
 

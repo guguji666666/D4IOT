@@ -14,6 +14,9 @@ or
 ```bash
 bash <(curl -s https://gugugit.iwanlab.us.kg/guguji/D4IOT/src/branch/main/TSG/D4IOTTSGAIO.sh)
 ```
+![image](https://github.com/user-attachments/assets/f3c580f5-b87d-4d60-af3f-7e7cd42e39b1)
+
+![image](https://github.com/user-attachments/assets/440902aa-146f-4b4f-8544-a6958f296aa8)
 
 ## Manual steps if want to run the commands one by one
 

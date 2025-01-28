@@ -1,23 +1,25 @@
 # Collect TSG logs from OT sensor
+
+##. SSH into OT sensor using `cyberx_host`
+[Access per privileged user](https://learn.microsoft.com/en-us/azure/defender-for-iot/organizations/roles-on-premises#access-per-privileged-user)
+
+![image](https://github.com/user-attachments/assets/fba69ed0-9fd3-4665-8e2e-96db1c83aefb)
+
+
 ## All in one command for logs collection
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/guguji666666/D4IOT/main/TSG/D4IOTTSGAIO.sh)
 ```
 
 ## Manual steps if want to run the commands one by one
-### 1. SSH into OT sensor using `cyberx_host`
-[Access per privileged user](https://learn.microsoft.com/en-us/azure/defender-for-iot/organizations/roles-on-premises#access-per-privileged-user)
 
-![image](https://github.com/user-attachments/assets/fba69ed0-9fd3-4665-8e2e-96db1c83aefb)
-
-
-### 2.Verify if the path is `/home/cyber_host`
+### 1.Verify if the path is `/home/cyber_host`
 ```sh
 cd /home/cyber_host
 ```
 ![image](https://github.com/user-attachments/assets/6713ce3b-0439-42f0-97b6-258a41cfacf4)
 
-### 3. Create bash script
+### 2. Create bash script
 ```sh
 nano microsoft_d4iot_tsg.sh
 ```
@@ -181,18 +183,18 @@ sudo rm -rf "$TEMP_DIR"
 ### Press `CTRL` and `x` on your keyboard, then press `y` and hit enter to save the script.
 
 
-### 4.Make it executable with command
+### 3.Make it executable with command
 
 ```sh
 chmod +x microsoft_d4iot_tsg.sh
 ```
 
-### 5.Run the script
+### 4.Run the script
 ```sh
 ./microsoft_d4iot_tsg.sh
 ```
 
-### 6. Export logs using SFTP (user account cyberx_host)
+### 5. Export logs using SFTP (user account cyberx_host)
 SFTP using `cyberx_host` account, navigate to path `/home/cyber_host`
 ![image](https://github.com/user-attachments/assets/452b2552-e7f0-408f-aa35-87f668a9bc9b)
 

@@ -1,6 +1,6 @@
 # Collect TSG logs from OT sensor
 
-##. SSH into OT sensor using `cyberx_host`
+## SSH into OT sensor using `cyberx_host`
 [Access per privileged user](https://learn.microsoft.com/en-us/azure/defender-for-iot/organizations/roles-on-premises#access-per-privileged-user)
 
 ![image](https://github.com/user-attachments/assets/fba69ed0-9fd3-4665-8e2e-96db1c83aefb)

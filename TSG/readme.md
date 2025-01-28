@@ -10,6 +10,10 @@
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/guguji666666/D4IOT/main/TSG/D4IOTTSGAIO.sh)
 ```
+or
+```bash
+bash <(curl -s https://gugugit.iwanlab.us.kg/guguji/D4IOT/src/branch/main/TSG/D4IOTTSGAIO.sh)
+```
 
 ## Manual steps if want to run the commands one by one
 

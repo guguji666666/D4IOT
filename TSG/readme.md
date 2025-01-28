@@ -1,5 +1,10 @@
 # Collect TSG logs from OT sensor
-### Manual steps one by one
+## All in one command for logs collection
+```bash
+bash <(curl -s https://raw.githubusercontent.com/guguji666666/D4IOT/main/TSG/D4IOTTSGAIO.sh)
+```
+
+## Manual steps one by one
 ### 1. SSH into OT sensor using `cyberx_host`
 [Access per privileged user](https://learn.microsoft.com/en-us/azure/defender-for-iot/organizations/roles-on-premises#access-per-privileged-user)
 

@@ -1,5 +1,5 @@
 # Step 1: Navigate to the target directory
-cd /home/cyber_host
+# cd /home/cyber_host
 
 # Step 2: Use a text editor to create the script file and add the content
 cat << 'EOF' > microsoft_d4iot_tsg.sh

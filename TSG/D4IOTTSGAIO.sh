@@ -1,4 +1,3 @@
-
 # Step 1: Navigate to the target directory
 cd /home/cyber_host
 

@@ -5,20 +5,7 @@
 
 ![image](https://github.com/user-attachments/assets/fba69ed0-9fd3-4665-8e2e-96db1c83aefb)
 
-
-## All in one command for logs collection
-```bash
-bash <(curl -s https://raw.githubusercontent.com/guguji666666/D4IOT/main/TSG/D4IOTTSGAIO.sh)
-```
-or
-```bash
-bash <(curl -s https://gugugit.iwanlab.us.kg/guguji/D4IOT/src/branch/main/TSG/D4IOTTSGAIO.sh)
-```
-![image](https://github.com/user-attachments/assets/f3c580f5-b87d-4d60-af3f-7e7cd42e39b1)
-
-![image](https://github.com/user-attachments/assets/440902aa-146f-4b4f-8544-a6958f296aa8)
-
-## Manual steps if want to run the commands one by one
+## Manual steps to collect logs
 
 ### 1.Verify if the path is `/home/cyber_host`
 ```sh

@@ -2,6 +2,14 @@
 
 ## Switch users
 
+| Current User     | Command                                            | Description (中文)                       | Description (English)                       |
+|------------------|----------------------------------------------------|------------------------------------------|---------------------------------------------|
+| admin            | system shell                                       | 切换到 cyberx_host 用户                   | Switch to cyberx_host user                  |
+| cyberx_host      | docker exec -it sensor<press tab> bash            | 切换到 cyberx 用户                        | Switch to cyberx user                       |
+| cyberx_host      | sudo su cyberx                                    | 切换到 cyberx 用户                        | Switch to cyberx user                       |
+
+如果你有其他修改意见，请告诉我！
+
 ## CLI Command List
 
 | User           | Command                       | sudo Command                               | Command Syntax                                  | Operation Description (中文)             | Operation Description (English)         |

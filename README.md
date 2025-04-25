@@ -2,39 +2,43 @@
 
 ## CLI Command List
 
-| User           | Command                       | sudo Command                               | Command Syntax                                 | Operation Description                   |
-|----------------|-------------------------------|--------------------------------------------|------------------------------------------------|----------------------------------------|
-| admin          | system                       | --                                         | cyberx-xsense-sanity                                      | check sanity (检查系统状态)            |
-| system         | system sanity                | --                                         | cyberx-xsense-sanity                                      | 检查系统状态 (check the system state) |
-| admin          | system reboot                | sudo reboot                                | sudo reboot                                       | restart the sensor (重启传感器)         |
-| cyberx_host    | system shutdown              | sudo shutdown -r now                       | sudo shutdown -r now                              | shutdown the sensor (关闭传感器)         |
-| admin          | system version               | --                                         | cyberx-xsense-version                                    | get the system version (获取系统版本)  |
-| admin          | date                         | --                                         | date                                              | get system date and time (获取系统日期和时间) |
-| cyberx         | date                         | --                                         | date                                              | get system date and time (获取系统日期和时间) |
-| cyberx_host    | date                         | --                                         | date                                              | get system date and time (获取系统日期和时间) |
-| admin          | ntp enable <IP address>     | --                                         | cyberx-xsense-ntp-enable <IP address>         | enable NTP for time sync (启用NTP时间同步) |
-| admin          | ntp disable <IP address>    | --                                         | cyberx-xsense-ntp-disable                       | disable NTP for time sync (禁用NTP时间同步) |
-| backup         | system backup-list           | --                                         | cyberx-xsense-system-backup-list                 | list all available backups on the sensor (列出所有可用备份) |
-| backup         | system backup                | --                                         | cyberx-xsense-system-backup -f <filename>      | create a backup of the sensor (创建传感器的备份) |
-| backup         | system restore               | --                                         | cyberx-xsense-system-restore                      | restore from backups on the sensor (从传感器备份恢复) |
-| backup         | --                           | --                                         | cyberx-backup-memory-check                       | check how much space is allocated for backups (检查备份空间分配) |
-| certificate    | --                           | --                                         | cyberx-xsense-certificate-import                 | import certificate (导入证书)           |
-| certificate    | --                           | --                                         | cyberx-xsense-create-self-signed-certificate     | create a self-signed certificate (创建自签名证书) |
-| network(24.1.5+)| network reconfigure         | --                                         | python3 -m cyberx.config.configure               | reconfigure network settings (重新配置网络设置) |
-| network        | --                           | sudo dpkg-reconfigure iot-sensor           | --                                              | reconfigure network settings (重新配置网络设置) |
-| network        | network validate             | --                                         | --                                              | validate and show network configuration (验证并显示网络配置) |
-| network        | --                           | --                                         | nload                                           | show traffic on different interfaces (显示不同接口的流量) |
-| network        | --                           | --                                         | cyberx-xsense-internet-connectivity             | check internet connectivity (检查互联网连接) |
-| network        | network list                | --                                         | ifconfig                                        | show status of configured interfaces (显示配置接口的状态) |
-| network        | network capture-filter       | --                                         | cyberx-xsense-capture-filter                    | configure capture filter (配置捕获过滤器) |
-| network        | --                           | --                                         | cyberx-xsense-capture-filter -p all -m all-connected| reset capture filter (重置捕获过滤器) |
-| alerts         | --                           | --                                         | cyberx-xsense-trigger-test-alert                | trigger a test alert (触发测试警报)     |
-| alerts         | alerts exclusion-rule-list   | --                                         | alerts cyberx-xsense-exclusion-rule-list        | list all alert exclusion rules (列出所有警报排除规则) |
-| alerts         | cyberx-xsense-exclusion-rule-create | --                                 | cyberx-xsense-exclusion-rule-create            | create new alert exclusion rule (创建新的警报排除规则) |
-| alerts         | exclusion-rule-append        | --                                         | exclusion-rule-append                             | modify alert exclusion rule (修改警报排除规则) |
-| alerts         | exclusion-rule-remove        | --                                         | exclusion-rule-remove                             | delete alert exclusion rule (删除警报排除规则) |
-| users          | --                           | passwd                                     | cyberx-users-password-reset -u <user> -p <password> | reset user password (重置用户密码)    |
-| users          | logout                       | logout                                     | cyberx-xsense-logout                             | log out of the user (退出用户)         |
-| admin          | timezone                     | --                                         | timezone                                         | 获取时区信息                          |
+好的，我会将操作描述分为两个单独的列：一个是中文描述，另一个是英文描述。以下是更新后的命令列表：
 
-表格已按您的要求更新，如果有其他命令需要添加或者有其他要求，请告诉我！
+### Command List
+
+| User           | Command                       | sudo Command                               | Command Syntax                                  | Operation Description (中文)             | Operation Description (English)         |
+|----------------|-------------------------------|--------------------------------------------|-------------------------------------------------|------------------------------------------|-----------------------------------------|
+| admin          | system                        | --                                         | cyberx-xsense-sanity                           | 检查系统状态                              | check sanity                           |
+| system         | system sanity                 | --                                         | cyberx-xsense-sanity                           | 检查系统状态                              | check the system state                  |
+| admin          | system reboot                 | sudo reboot                                | sudo reboot                                     | 重启传感器                                | restart the sensor                      |
+| cyberx_host    | system shutdown               | sudo shutdown -r now                       | sudo shutdown -r now                            | 关闭传感器                                | shutdown the sensor                     |
+| admin          | system version                | --                                         | cyberx-xsense-version                          | 获取系统版本                              | get the system version                  |
+| admin          | date                          | --                                         | date                                            | 获取系统日期和时间                        | get system date and time                |
+| cyberx         | date                          | --                                         | date                                            | 获取系统日期和时间                        | get system date and time                |
+| cyberx_host    | date                          | --                                         | date                                            | 获取系统日期和时间                        | get system date and time                |
+| admin          | ntp enable                    | --                                         | cyberx-xsense-ntp-enable                       | 启用NTP时间同步                           | enable NTP for time sync                |
+| admin          | ntp disable                   | --                                         | cyberx-xsense-ntp-disable                      | 禁用NTP时间同步                           | disable NTP for time sync                |
+| backup         | system backup-list            | --                                         | cyberx-xsense-system-backup-list               | 列出所有可用备份                          | list all available backups on the sensor |
+| backup         | system backup                 | --                                         | cyberx-xsense-system-backup -f <filename>     | 创建传感器的备份                          | create a backup of the sensor             |
+| backup         | system restore                | --                                         | cyberx-xsense-system-restore                   | 从传感器备份恢复                          | restore from backups on the sensor       |
+| backup         | --                            | --                                         | cyberx-backup-memory-check                     | 检查备份空间分配                          | check how much space is allocated for backups |
+| certificate     | --                            | --                                         | cyberx-xsense-certificate-import               | 导入证书                                  | import certificate                       |
+| certificate     | --                            | --                                         | cyberx-xsense-create-self-signed-certificate   | 创建自签名证书                            | create a self-signed certificate        |
+| network(24.1.5+)| network reconfigure          | --                                         | python3 -m cyberx.config.configure             | 重新配置网络设置                          | reconfigure network settings             |
+| network        | --                            | sudo dpkg-reconfigure iot-sensor          | --                                              | 重新配置网络设置                          | reconfigure network settings             |
+| network        | network validate              | --                                         | --                                              | 验证并显示网络配置                        | validate and show network configuration   |
+| network        | --                            | --                                         | nload                                          | 显示不同接口的流量                        | show traffic on different interfaces     |
+| network        | --                            | --                                         | cyberx-xsense-internet-connectivity            | 检查互联网连接                            | check internet connectivity               |
+| network        | network list                 | --                                         | ifconfig                                       | 显示配置接口的状态                        | show status of configured interfaces      |
+| network        | network capture-filter        | --                                         | cyberx-xsense-capture-filter                   | 配置捕获过滤器                            | configure capture filter                  |
+| network        | --                            | --                                         | cyberx-xsense-capture-filter -p all -m all-connected| 重置捕获过滤器                          | reset capture filter                      |
+| alerts         | --                            | --                                         | cyberx-xsense-trigger-test-alert              | 触发测试警报                              | trigger a test alert                     |
+| alerts         | alerts exclusion-rule-list    | --                                         | alerts cyberx-xsense-exclusion-rule-list       | 列出所有警报排除规则                      | list all alert exclusion rules           |
+| alerts         | cyberx-xsense-exclusion-rule-create| --                                   | cyberx-xsense-exclusion-rule-create            | 创建新的警报排除规则                      | create new alert exclusion rule          |
+| alerts         | exclusion-rule-append         | --                                         | exclusion-rule-append                           | 修改警报排除规则                          | modify alert exclusion rule              |
+| alerts         | exclusion-rule-remove         | --                                         | exclusion-rule-remove                           | 删除警报排除规则                          | delete alert exclusion rule              |
+| users          | --                            | passwd                                     | cyberx-users-password-reset -u <user> -p <password> | 重置用户密码                              | reset user password                      |
+| users          | logout                        | logout                                     | cyberx-xsense-logout                           | 退出用户                                  | log out of the user                     |
+| admin          | timezone                      | --                                         | timezone                                        | 获取时区信息                              | get timezone information                  |
+
+请告诉我是否需要进一步的修改或添加！
